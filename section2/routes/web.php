@@ -36,6 +36,9 @@ Route::get('/', function () {
 Route::get('posts/{post}', function($slug) {
     $path = __DIR__ . "/../resources/posts/{$slug}.html";
 
+    //dd($path);
+    //"C:\Users\Korisnik\Desktop\Laravel\laracasts\section2\routes/../resources/posts/my-second-post.html" // routes\web.php:39
+
     if(! file_exists($path)){
         return redirect('/');
         //abort(404);
@@ -47,5 +50,5 @@ Route::get('posts/{post}', function($slug) {
         'post' => $post
     ]);
 
-});
+})->where('post', '[A-z_\-]+');
 
