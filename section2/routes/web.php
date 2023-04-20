@@ -44,7 +44,9 @@ Route::get('posts/{post}', function($slug) {
         //abort(404);
     }
 
-    $post = file_get_contents($path);
+    $post = cache()->remeber("posts.{$slug}", now()->addHour(), function() use ($path) {  //3600 u sekundama
+        return file_get_contents($path);
+    });
     
     return view('post', [
         'post' => $post
