@@ -7,19 +7,11 @@
        
     </head>
     <body>
-        <article>
-            <h1><a href="/posts/my-first-post">My first post</a></h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce turpis urna, pretium at maximus in, rhoncus a ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse a urna ullamcorper lacus placerat aliquam at et justo. Cras placerat metus libero, non pretium velit malesuada sit amet. In et.</p>
-        </article>
 
+        <?php foreach ($posts as $post) : ?>
         <article>
-            <h1><a href="/posts/my-second-post">My second post</a></h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce turpis urna, pretium at maximus in, rhoncus a ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse a urna ullamcorper lacus placerat aliquam at et justo. Cras placerat metus libero, non pretium velit malesuada sit amet. In et.</p>
+           <?= $post; ?>
         </article>
-
-        <article>
-            <h1><a href="/posts/my-third-post">My third post</a></h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce turpis urna, pretium at maximus in, rhoncus a ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse a urna ullamcorper lacus placerat aliquam at et justo. Cras placerat metus libero, non pretium velit malesuada sit amet. In et.</p>
-        </article>
+        <?php endforeach; ?>
     </body>
-</html>
+ 
