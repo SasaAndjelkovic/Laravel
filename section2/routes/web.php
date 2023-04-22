@@ -7,47 +7,57 @@ use Illuminate\Support\Facades\File;
 
 
 Route::get('/', function () {
+
+    //fdfff
+    $posts = Post::all();
+
+    //COLLECTIONS 2
+    // $posts = collect(File::files(resource_path("posts")))
+    // ->map(fn($file) => YamlFrontMatter::parseFile($file))
+    // ->map(fn($document) => new Post(
+    //     $document->title,
+    //     $document->excerpt,
+    //     $document->date,
+    //     $document->body(),
+    //     $document->slug,
+    // ));
     
-    //$document = YamlFrontMatter::parseFile(resource_path('posts/my-fourth-post.html'));
-    //dd($document);
-    //dd($document->body());
-    //dd($document->matter());
-    //dd($document->matter('title'));
-    //dd($document->title);
-
-    $files = File::files(resource_path("posts"));
-    //$documents = [];
-    $posts = [];
-
-    foreach($files as $file) {
-        //$documents[] = YamlFrontMatter::parseFile($file);
-        $document = YamlFrontMatter::parseFile($file);
-       
-        $posts[] = new Post(
-            $document->title,
-            $document->excerpt,
-            $document->date,
-            $document->body(),
-            $document->slug,
-        );
-    }
-
-    //dd($documents);
-    //dd($posts);
-    //dd($posts[0]);
-    //dd($posts[0]->title);
     
-    //$posts = Post::all();
+    //COLLECTIONS 1
+    // $files = File::files(resource_path("posts"));
 
-    //dd($posts[0]->getContents());
+    // $posts = collect($files)
+    //     ->map(function ($file) {
+    //     $document = YamlFrontMatter::parseFile($file);
+
+    //     return $posts[] = new Post(
+    //         $document->title,
+    //         $document->excerpt,
+    //         $document->date,
+    //         $document->body(),
+    //         $document->slug,
+    //     );
+    // });
+   
+    //ARRAY_MAP
+    // $files = File::files(resource_path("posts"));
+    // $posts = array_map(function ($file) {
+    //     $document = YamlFrontMatter::parseFile($file);
+
+    //     return $posts[] = new Post(
+    //         $document->title,
+    //         $document->excerpt,
+    //         $document->date,
+    //         $document->body(),
+    //         $document->slug,
+    //     );
+    // }, $files);
 
     return view('posts', [
         'posts' => $posts
     ]);
   
 });
-
-
 
 Route::get('posts/{post}', function($slug) 
 //Find a post by its slug and pass it to a view called "post"

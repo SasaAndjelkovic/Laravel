@@ -4,7 +4,6 @@
 
         <?php foreach ($posts as $post) : ?>
         <article>
-           <!-- <//?= $post; ?> niz-->  
            <h1>
                 <a href="/posts/<?= $post->slug?>">
                     <?= $post->title; ?>
