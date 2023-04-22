@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends ('layout')
 
-       
-    </head>
-    <body>
-        <article>
-            <!-- <h1><//?= $post->title ?></h1> -->
-            <h1>{{ $post->title }}</h1>
+@section ('content')
 
-            <div>
-                <!-- <//?= $post->body ?>  -->
-                {! $post->body !} 
-            </div>
-        </article>
+    <article>
+        <h1>{{ $post->title }}</h1>
 
-        <a href="/">Go back</a>
+        <div>
+            {!! $post->body !!} 
+        </div>
+    </article>
 
-    </body>
-</html>
+    <a href="/">Go back</a>
+
+@endsection
