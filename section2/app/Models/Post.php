@@ -21,9 +21,10 @@ class Post {
         $this->slug = $slug;
     }
 
-    public static function all() 
-    {
-        return collect(File::files(resource_path("posts")))
+    public static function all() {
+
+        return cache()->rememberForever('posts.all', function() {
+            return collect(File::files(resource_path("posts")))
             ->map(fn($file) => YamlFrontMatter::parseFile($file))
             ->map(fn($document) => new Post(
                 $document->title,
@@ -31,7 +32,9 @@ class Post {
                 $document->date,
                 $document->body(),
                 $document->slug,
-        ));
+        ))
+            ->sortByDesc('date');
+        });
     }
 
     public static function find($slug) 
@@ -42,13 +45,5 @@ class Post {
         
         //sada je kolekcija... get the first item by the given key value pair
         return $posts->firstWhere('slug', $slug);
-
-        // $path = resource_path("posts/{$slug}.html");
-
-        // if(! file_exists($path)){
-        //     throw new ModelNotFoundException();
-        // }
-    
-        // return cache()->remember("posts.{$slug}", now()->addHour(), fn() => file_get_contents($path));
     }
 }
