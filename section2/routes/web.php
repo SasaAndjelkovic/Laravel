@@ -7,18 +7,37 @@ use Illuminate\Support\Facades\File;
 
 
 Route::get('/', function () {
-    $document = Spatie\YamlFrontMatter\YamlFrontMatter::parseFile(resource_path('posts/my-fourth-post.html'));
-
-    dd($document);
-
-    // $files = File::files(resource_path("posts"));
-    // $documents = [];
-
-    // foreach($files as $file) {
-    //     $documents[] = YamlFrontMatter::parseFile($file);
-    // }
     
-    $posts = Post::all();
+    //$document = YamlFrontMatter::parseFile(resource_path('posts/my-fourth-post.html'));
+    //dd($document);
+    //dd($document->body());
+    //dd($document->matter());
+    //dd($document->matter('title'));
+    //dd($document->title);
+
+    $files = File::files(resource_path("posts"));
+    //$documents = [];
+    $posts = [];
+
+    foreach($files as $file) {
+        //$documents[] = YamlFrontMatter::parseFile($file);
+        $document = YamlFrontMatter::parseFile($file);
+       
+        $posts[] = new Post(
+            $document->title,
+            $document->excerpt,
+            $document->date,
+            $document->body(),
+            $document->slug,
+        );
+    }
+
+    //dd($documents);
+    //dd($posts);
+    //dd($posts[0]);
+    //dd($posts[0]->title);
+    
+    //$posts = Post::all();
 
     //dd($posts[0]->getContents());
 
