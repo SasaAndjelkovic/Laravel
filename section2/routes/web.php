@@ -13,11 +13,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('posts/{post}', function($id) 
-//Find a post by its slug and pass it to a view called "post"
+Route::get('posts/{post:slug}', function(Post $post) //Post::where ('slug', $post)->firstOrFail()
+//Route::get('posts/{post}', function(Post $post) //Post::where ('slug', $post)->firstOrFail()
 {    
-    $post = Post::findOrFail($id);
-
+    
     return view('post', [
         'post' => $post
     ]);
